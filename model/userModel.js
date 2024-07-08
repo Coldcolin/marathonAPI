@@ -13,7 +13,19 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    Sex:{
+        type: String,
+        required: true,
+    },
+    Status:{
+        type: String,
+        required: true,
+    },
     Phone: {
+        type: String,
+        required: true,
+    },
+    email: {
         type: String,
         required: true,
     },
@@ -33,7 +45,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    StateLGA: {
+        type: String,
+        required: true,
+    },
     EmergencyFirstName: {
+        type: String,
+        required: true,
+    },
+    EmergencyRelationship: {
         type: String,
         required: true,
     },
@@ -42,6 +62,10 @@ const userSchema = new mongoose.Schema({
         required: true,
     },
     EmergencyPhone: {
+        type: String,
+        required: true,
+    },
+    Category: {
         type: String,
         required: true,
     },
