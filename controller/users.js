@@ -39,7 +39,7 @@ const signUp = async (req, res) => {
 
 const getUsers= async(eq, res)=>{
     try{
-        const users = await userModel.find();
+        const users = await userModel.find().select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName EmergencyRelationship EmergencyLastName EmergencyPhone Category shirt')
 
         res.status(200).json({data: users})
     }catch(error){
