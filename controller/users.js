@@ -130,22 +130,22 @@ const webHook = async (req, res) => {
         const hash = crypto.createHmac('sha512', secret).update(JSON.stringify(req.body)).digest('hex');
         if (hash == req.headers['x-paystack-signature']) {
         // Retrieve the request's body
-        const event = req.body;
+        const {event, data} = req.body;
   
-            if (event.event === 'charge.success') {
-                const user = await userModel.find().where("reference").equals(`${event.data.reference}`)
+            if (event === 'charge.success') {
+                const user = await userModel.findOne({ reference: data.reference });
             // You can also perform additional actions here, like updating your database
-                user.paymentStatus = "Payment Confirmed"
-                await user.save()
+                if (user && data.status === 'success' && user.paymentStatus !== 'Payment Confirmed') {
+                    user.paymentStatus = "Payment Confirmed"
+                    await user.save()
+                }
+                
             }
         }
-
-
-    res.send('Webhook received');
+        res.sendStatus(200); 
     }catch(error){
-        return res.status(500).json({
-            message: "Internal server error: " + error.message,
-        })
+        console.error('Webhook handling error:', error.message);  
+        res.sendStatus(500);
     }
   };
 
