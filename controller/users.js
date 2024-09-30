@@ -135,10 +135,10 @@ const webHook = async (req, res) => {
             if (event === 'charge.success') {
                 const user = await userModel.findOne({ reference: data.reference });
             // You can also perform additional actions here, like updating your database
-                if ((user && data.status === 'success' ) && (user.paymentStatus !== 'Payment Confirmed')) {
+                // if ((user && data.status === 'success' ) && (user.paymentStatus !== 'Payment Confirmed')) {
                     user.paymentStatus = "Payment Confirmed"
                     await user.save()
-                }
+                // }
             }
         }
         return res.sendStatus(200); 
