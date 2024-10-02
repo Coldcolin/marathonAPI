@@ -143,7 +143,7 @@ const webHook = async (req, res) => {
         }
         return res.sendStatus(200); 
     }catch(error){
-        console.error('Webhook handling error:', error.message);  
+        console.error('Webhook handling errors:', error.message);  
         res.sendStatus(500);
     }
   };
