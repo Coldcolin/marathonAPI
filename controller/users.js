@@ -1,7 +1,8 @@
 require('dotenv').config();
 const userModel = require("../model/userModel");
 const crypto = require('crypto');
-const secret = process.env.SECRET_KEY;
+const secret = process.env.SECRETE_KEY;
+
 
 const signUp = async (req, res) => {
     try{
@@ -141,6 +142,7 @@ const webHook = async (req, res) => {
                 // }
             }
         }
+        // console.log(secret)
         return res.sendStatus(200); 
     }catch(error){
         console.error('Webhook handling errors:', error.message);  
