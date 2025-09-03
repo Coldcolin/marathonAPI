@@ -20,8 +20,8 @@ const signUp = async (req, res) => {
                 State: req.body.State,
                 StateLGA: req.body.StateLGA,
                 EmergencyFirstName: req.body.EmergencyFirstName.trim(),
-                EmergencyRelationship: req.body.EmergencyRelationship.trim(),
                 EmergencyLastName: req.body.EmergencyLastName.trim(),
+                EmergencyRelationship: req.body.EmergencyRelationship.trim(),
                 EmergencyPhone: req.body.EmergencyPhone.trim(),
                 Category: req.body.Category.trim(),
                 shirt: req.body.shirt.trim(),
@@ -45,7 +45,7 @@ const signUp = async (req, res) => {
 
 const getUsers= async(eq, res)=>{
     try{
-        const users = await userModel.find().select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName EmergencyRelationship EmergencyLastName EmergencyPhone Category shirt reference paymentStatus')
+        const users = await userModel.find().select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName  EmergencyLastName EmergencyRelationship EmergencyPhone Category shirt reference paymentStatus')
 
         res.status(200).json({data: users})
     }catch(error){
