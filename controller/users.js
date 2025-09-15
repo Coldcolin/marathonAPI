@@ -43,17 +43,42 @@ const signUp = async (req, res) => {
 }
 
 
-const getUsers= async(eq, res)=>{
-    try{
-        const users = await userModel.find().select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName  EmergencyLastName EmergencyRelationship EmergencyPhone Category shirt reference paymentStatus')
+const getUsers = async (req, res) => {
+    try {
+        const users = await userModel.find()
+            .select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName EmergencyLastName EmergencyRelationship EmergencyPhone Category shirt reference paymentStatus')
+            .lean()
+            .then(users => users.map(user => ({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                DOB: user.DOB,
+                Sex: user.Sex,
+                Status: user.Status,
+                Phone: user.Phone,
+                email: user.email,
+                Address: user.Address,
+                LGA: user.LGA,
+                Ward: user.Ward,
+                State: user.State,
+                StateLGA: user.StateLGA,
+                EmergencyFirstName: user.EmergencyFirstName,
+                EmergencyLastName: user.EmergencyLastName,
+                EmergencyRelationship: user.EmergencyRelationship,
+                EmergencyPhone: user.EmergencyPhone,
+                Category: user.Category,
+                shirt: user.shirt,
+                reference: user.reference,
+                paymentStatus: user.paymentStatus
+            })));
 
-        res.status(200).json({data: users})
-    }catch(error){
+        res.status(200).json({ data: users });
+    } catch (error) {
         return res.status(500).json({
             message: "Internal server error: " + error.message,
-        })
+        });
     }
-}
+};
+
 
 // {
 //     "event": "charge.success",
