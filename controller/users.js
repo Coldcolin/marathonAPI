@@ -49,6 +49,7 @@ const getUsers = async (req, res) => {
             .select('firstName lastName DOB Sex Status Phone email Address LGA Ward State StateLGA EmergencyFirstName EmergencyLastName EmergencyRelationship EmergencyPhone Category shirt reference paymentStatus')
             .lean()
             .then(users => users.map(user => ({
+                id: user._id,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 DOB: user.DOB,
